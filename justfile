@@ -30,11 +30,11 @@ abi(target) := if target == "aarch64-linux-android" { "arm64-v8a" } else if targ
 [unix]
 copy_to_jni_folder target: (build_rust target)
     mkdir -p "Android/app/src/main/jniLibs/{{ abi(target) }}"
-    cp target/aarch64-linux-android/{{ profile }}/lib{{ name }}.so "Android/app/src/main/jniLibs/{{ abi(target) }}"/
+    cp target/{{ target }}/{{ profile }}/lib{{ name }}.so "Android/app/src/main/jniLibs/{{ abi(target) }}/"
 [windows]
 copy_to_jni_folder target: (build_rust target)
     New-Item -ItemType Directory -Force "Android/app/src/main/jniLibs/{{ abi(target) }}" | Out-Null
-    Copy-Item target/aarch64-linux-android/{{ profile }}/lib{{ name }}.so "Android/app/src/main/jniLibs/{{ abi(target) }}"/
+    Copy-Item target/{{ target }}/{{ profile }}/lib{{ name }}.so "Android/app/src/main/jniLibs/{{ abi(target) }}/"
 [unix]
 copy_to_jni_folder_:
     #!/usr/bin/env sh
@@ -65,7 +65,3 @@ launch:
 [env("JAVA_HOME", "/usr/lib/jvm/java-21-temurin-jdk")]
 build_cargo_apk:
     RUST_LOG=debug cargo apk2 build
-# logcat:
-#     adb logcat -c
-#     #launch
-#     adb logcat | grep todolist > android-log.logcat

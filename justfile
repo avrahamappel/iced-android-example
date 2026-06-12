@@ -64,4 +64,4 @@ launch:
 [env("ANDROID_NDK_ROOT", env("ANDROID_NDK_ROOT"))]
 [env("JAVA_HOME", "/usr/lib/jvm/java-21-temurin-jdk")]
 build_cargo_apk:
-    RUST_LOG=debug cargo apk2 build
+    RUST_LOG=debug cargo apk2 build --lib

@@ -40,5 +40,5 @@ value = "todolist"
 actions = ["android.intent.action.MAIN"]
 categories = ["android.intent.category.LAUNCHER"]
 
-[patch."https://github.com/iced-mobile/iced.git"]
-iced = { path = "../iced_mobile" }
+# [patch."https://github.com/iced-mobile/iced.git"]
+# iced = { path = "../iced_mobile" }

@@ -14,6 +14,7 @@ alias build := build_gradle
 
 [env("CARGO_TARGET_AARCH64_LINUX_ANDROID_LINKER", "aarch64-linux-android" + min_sdk + "-clang.cmd")]
 [env("CARGO_TARGET_X86_64_LINUX_ANDROID_LINKER", "x86_64-linux-android" + min_sdk + "-clang.cmd")]
+[env("CARGO_TARGET_ARMV7_LINUX_ANDROIDEABI_LINKER", "armv7a-linux-androideabi" + min_sdk + "-clang.cmd")]
 [env("PATH", env("ANDROID_NDK_BIN") + ";" + env("PATH"))]
 [windows]
 build_rust target:
@@ -21,6 +22,7 @@ build_rust target:
 
 [env("CARGO_TARGET_AARCH64_LINUX_ANDROID_LINKER", "aarch64-linux-android" + min_sdk + "-clang")]
 [env("CARGO_TARGET_X86_64_LINUX_ANDROID_LINKER", "x86_64-linux-android" + min_sdk + "-clang")]
+[env("CARGO_TARGET_ARMV7_LINUX_ANDROIDEABI_LINKER", "armv7a-linux-androideabi" + min_sdk + "-clang")]
 [env("PATH", env("ANDROID_NDK_BIN") + ":" + env("PATH"))]
 [unix]
 build_rust target:

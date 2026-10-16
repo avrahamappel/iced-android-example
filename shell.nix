@@ -12,7 +12,7 @@ with import <nixpkgs>
 
 let
   targets = [
-    "aarch64-linux-android" # (64-bit ARM, used by most modern devices)
+    # "aarch64-linux-android" # (64-bit ARM, used by most modern devices)
     "armv7-linux-androideabi" # (32-bit ARM, more supported)
     # "x86_64-linux-android" # (for Android emulators)
   ];
@@ -33,7 +33,10 @@ let
       [ null null ]
       gradleBuildSettings) 1;
 
+  buildToolsVersion = "36.0.0";
+
   androidComposition = pkgs.androidenv.composeAndroidPackages {
+    buildToolsVersions = [ buildToolsVersion ];
     # abiVersions = [
     #   "armeabi-v7a"
     #   "arm64-v8a"
@@ -58,5 +61,6 @@ mkShell rec {
   ANDROID_HOME = "${androidComposition.androidsdk}/libexec/android-sdk";
   ANDROID_NDK_ROOT = "${ANDROID_HOME}/ndk-bundle";
   ANDROID_NDK_BIN = "${ANDROID_HOME}/ndk/${androidComposition.ndk-bundle.version}/toolchains/llvm/prebuilt/linux-x86_64/bin";
+  GRADLE_OPTS = "-Dorg.gradle.project.android.aapt2FromMavenOverride=${ANDROID_HOME}/build-tools/${buildToolsVersion}/aapt2";
   JAVA_HOME = "${jdk.home}";
 }
